@@ -1,0 +1,27 @@
+FOLDER=folder
+
+#backup di una cartella appendendo “.bak” al nome
+backup: 
+	@mkdir $(FOLDER).bak
+	@cp *  $(FOLDER).bak
+	@echo $(FOLDER).bak creato
+
+help:
+	@echo "Chedi aiuto psichiatrico"
+
+#restore che ripristini il contenuto originale.
+restore:
+	@rm $(FOLDER).bak/*
+	@rmdir $(FOLDER).bak
+	@echo $(FOLDER).bak eliminato
+
+#Compilazione automatica
+output: esempio.c lib.h
+	@g++ esempio.c lib.h -o output
+
+# .PHONY dichiara le pseudo-regole (con target non file
+# o comunque con target da non verificare)
+.PHONY: help
+
+# .SILENT dichiara le regole di cui NON fare l'echo
+# evitando di usare "@" prima di ogni comando
