@@ -29,6 +29,10 @@ void main()
      * int queueId = msgget(queue1Key, 0777 | IPC_CREAT);
      * [Rimuove la code se esiste]
      * msgctl(queueId, IPC_RMID, NULL);
+     * [Mandare messaggi]
+     * msgsnd(queueId, &msgpSND, sizeof(msgpSND.mtext), 0);
+     * [Ricevere messaggi]
+     * msgrcv(queueId, &msgpRCV, sizeof(msgpRCV.mtext), 1, 0)
      */
     #pragma endregion
 
