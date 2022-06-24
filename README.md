@@ -23,7 +23,7 @@ gcc -std=gnu90 -o program main.c -pthread
 //Fork ed altre Sys calls
 #include <unistd.h>
 
-//pipes
+//Pipes
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -34,6 +34,12 @@ gcc -std=gnu90 -o program main.c -pthread
 //Signals
 #include <signal.h>
 
-//threads
+//MessageQueues
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+
+//Threads
 #include <pthread.h>
 ```
+
