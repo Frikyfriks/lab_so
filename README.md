@@ -94,17 +94,63 @@ L’esecuzione di un azione:
 [Esempi di Makefile](https://github.com/Frikyfriks/lab_so/tree/main/makefile)
 
 ## Programmi C
+### Cheatsheet
+[Cheatsheet](http://dcjtech.info/wp-content/uploads/2017/09/C-Programming.pdf)
+
 ### Comando per la compilazione
 ```bash
 gcc -std=gnu90 main.c -o $(NAME)
 ```
+### Signals
+#### Lista di segnali
+![image](https://user-images.githubusercontent.com/37717224/175788664-c18d619c-2349-46a2-bfc6-396657dd8cd9.png)
+
+### Other Syscalls
+#### Exec
+##### Tipi di exec
+```C
+int execvp (args[0], args);
+```
+Le exec con la 'v' (execv/execvp/execve) hanno un parametro che è un array di argomenti (l'ultimo elemento dell'array deve essere NULL).
+Le exec con la 'l' (execl/execlp/execle) prendono un numero variabile di argomenti (l'ultimo argomento passato deve essere un NULL).
+Le execX prendono come primo parametro un file da lanciare.
+Le execXp sono in grado di cercare l'eseguibile secondo gli stessi criteri della shell se non viene specificato un path nel file.
+Le execXe hanno un parametro che è un array di stringhe che contiene le variabili di ambiente da passare al processo.
+
+#### DUP
+```C
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+```
+La dup() prende il primo descrittore libero, ci copia dentro il descrittore oldfd e lo ritorna. La funzione dup2() copia il descrittore oldfd sul descrittore newfd: se newfd era un descrittore aperto, lo chiude prima. Entrambe le funzioni ritornano il valore del descrittore in cui oldfd è stato copiato: nel caso della dup, viene ritornato il valore del nuovo descrittore; nel caso della dup2() viene ritornato il valore di newfd.
+
+Le funzioni dup() vengono utilizzate principalmente per redirigere lo stdout e lo stdin di un processo su un file. Vedremo nel prossimo capitolo come la shell implementa le operazioni di re-direzione dell'input e dell'output di un processo tramite queste due funzioni.
+
+### Fork
+#### Return
+| Return value | Meaning   |
+|--------------|-----------|
+| <0           | Errore    |
+| 0            | Return del Figlio  |
+| >0           | Return del padre, il PID del figlio  |
+
+#### Identificativi Processo
+| ID      | Meaning   |
+|--------------|-----------|
+| PID     |Process ID |
+| PPID    |Parent Process ID |
+| SID     |Session ID |
+| UID     | User ID  |
+| PGID    |Process group ID |
+| EUID    | Effective User ID  |
 
 ### Threads
+#### Compilazione
 Per la compilazione dei thread è necessario aggiungere il flag -pthread, ad esempio:
 ```bash
-gcc -std=gnu90 -o program main.c -pthread
+gcc -std=gnu90 -o $(NAME) main.c -pthread
 ```
-## Librerie e loro utilizzo
+### Librerie e loro utilizzo
 ```C
 //Classiche
 #include <stdio.h>
