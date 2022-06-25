@@ -2,6 +2,15 @@
 Qualche esempio su ogni argomento del corso
 
 ## Bash e Terminale
+### Esecuzione Script
+Per rendere eseguibile uno script bash, deve avere una riga commentata in alto:
+```bash
+#!/bin/bash
+```
+Inoltre per far capire al sistema che è un eseguibile
+```cli
+chmod 777
+```
 ### Espansione aritmentica
 All’interno delle doppie parentesi tonde si possono rappresentare varie espressioni matematiche inclusi assegnamenti e confronti.
 
