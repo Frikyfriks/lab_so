@@ -1,0 +1,6 @@
+#!/bin/bash
+# Scrivere uno script che  mostri il contenuto della cartella corrente in ordine 
+# inverso rispetto all’output generato da “ls” (che si può usare ma senza opzioni)
+
+./reverseargument $(ls)
+

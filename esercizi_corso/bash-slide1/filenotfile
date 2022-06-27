@@ -1,0 +1,14 @@
+#!/bin/bash
+# Stampa “file”, “cartella” o “?” a seconda che il valore rappresenti un file 
+# (esistente), una cartella (esistente) o una voce non presente nel file-system
+if [[ -e $1 ]]
+then
+ if [[ -f $1 ]]
+ then
+ echo file
+ else
+ echo cartella
+ fi
+else
+echo ?
+fi

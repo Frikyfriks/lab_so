@@ -1,0 +1,12 @@
+#Creare un makefile con una regola help di default che mostri una nota 
+#informativa, una regola backup che crei un backup di una cartella appendendo 
+#“.bak” al nome e una restore che ripristini il contenuto originale
+FOLDER=folder
+backup: 
+	@mkdir $(FOLDER).bak
+	@cp *  $(FOLDER).bak
+	@echo $(FOLDER).bak creato
+
+help:
+	@echo "questo makefile crea un backup"
+

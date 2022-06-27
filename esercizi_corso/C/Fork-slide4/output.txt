@@ -1,0 +1,6 @@
+Sono il padre che stampa, perché fork ha ritornato il valore 7790
+Errore nell'esecuzione bashpipe.c
+Sono il padre che stampa, perché fork ha ritornato il valore 7791
+Errore nell'esecuzione ls
+Sono il padre che stampa, perché fork ha ritornato il valore 7792
+Errore nell'esecuzione wc

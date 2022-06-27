@@ -1,0 +1,8 @@
+#!/bin/bash
+#Stampa argomenti al contrario
+lista=($@)
+((i=$#))
+while [[ $i -ge 0 ]]; do
+echo ${lista[$i]}
+((i--))
+done

@@ -1,0 +1,8 @@
+# Stampa il risultato di una semplice operazione aritmetica (es: ‘1 < 2’) contenuta 
+# nel file indicato dal valore di DATA, oppure “?” se il file non esiste
+if [[ -f $1 ]]
+then
+    echo $(( $(cat $1) ))
+else
+    echo ?
+fi
