@@ -3,7 +3,7 @@ Qualche esempio su ogni argomento del corso
 
 ## Bash e Terminale
 ### Esecuzione Script
-Per rendere eseguibile uno script bash, deve avere una riga commentata in alto:
+Per rendere eseguibile uno script bash, deve avere una riga commentata in alto, un metacommento (detto hash-bang o she-bang)
 ```bash
 #!/bin/bash
 ```
