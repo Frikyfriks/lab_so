@@ -28,6 +28,10 @@ void quit(int errNo)
     case 7:
         fprintf(stderr, "Pipe reading error.\n");
         break;
+     default:
+        fprintf(stderr, "unknown (%d)", errNo);
+        break;
+    };
     }
 }
 
