@@ -60,6 +60,16 @@ else
   echo "Number is between 10 and 20"
 fi
 ```
+#### Variabili
+```bash
+$HOSTNAME #il nome del computer host 
+$HOSTYPE #il tipo di computer host 
+$OSTYPE #il tipo di sistema operativo 
+$LOGNAME #il nome di login dell'utente 
+$HOME #la directory dell'utente 
+$PATH #il percorso della directory corrente 
+$HELL #la shell
+```
 
 #### Loops
 ##### For Loops
