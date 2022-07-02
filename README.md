@@ -111,7 +111,7 @@ L’esecuzione di un azione:
 ```
 ### If else Statement
 
-```makefile
+```bash
 if [ -z "$(APP_NAME)" ]; then \
         echo "Empty"; \
     else \
