@@ -109,6 +109,16 @@ L’esecuzione di un azione:
 ```bash
   make target1    
 ```
+### If else Statement
+
+```makefile
+if [ -z "$(APP_NAME)" ]; then \
+        echo "Empty"; \
+    else \
+        echo "Not empty"; \
+    fi
+```
+
 ### Esempi
 [Esempi di Makefile](https://github.com/Frikyfriks/lab_so/tree/main/makefile)
 
