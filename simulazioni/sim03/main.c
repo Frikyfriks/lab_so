@@ -21,7 +21,6 @@
 FILE *fp;                 // handler for log file stated in argument <path>
 char queuePath[MAX_CHAR]; // <name> passato come argomento
 char action[MAX_CHAR];    // <action> passato come argomento
-char value[MAX_CHAR];     // <value> passato come argomento
 char pid[MAX_CHAR];       // <pid> passato come argomento
 
 void quit(int code)
@@ -96,76 +95,65 @@ bool file_exists(const char *target)
 // struttura buffer della queue
 struct msg_buffer
 {
-    char value[MAX_CHAR];
+    long mtype;
+    char value[MAX_CHAR]; // <value> passato come argomento
 } msgpSND, msgpRCV;
-
-int createQueue()
-{
-    // Restituisce una chiave basandosi sul path
-    key_t queue1Key = ftok(queuePath, 1);
-
-    // Creazione queue
-    int queueID = msgget(queue1Key, 0777 | IPC_CREAT);
-    
-    return queueID;
-}
-
-int retrieveQueueID()
-{
-    // Rigenera la chiave, tanto è univoca
-    key_t queue1Key = ftok(queuePath, 1);
-
-    // Recupero queueID
-    int queueID = msgget(queue1Key, 1);
-    return queueID;
-}
 
 void actionHandler(char *action)
 {
-
-    int queueID;
-    if (!file_exists(queuePath))
-        queueID = createQueue();
-    if (DEBUG == 1)
-    {
-        printf("queue creata\n");
-    }
-
-    else
-        queueID = retrieveQueueID();
-
-    if (DEBUG == 1)
-    {
-        printf("queueID: %d\n", queueID);
-    }
+    msgpSND.mtype = 1;
+    msgpRCV.mtype = 2;
 
     // NON ESISTE SWITCH PER STRINGHE C MERDA
-    if (strcmp("new", action))
+    if (strcmp("new", action) == 0)
     {
-        printf("queueID: %d\n", queueID);
+        key_t queue1Key = ftok(queuePath, 1);
+        // Creazione queue
+        int queueID = msgget(queue1Key, 0777 | IPC_CREAT);
     }
-    else if (strcmp("put", action))
+    else if (strcmp("put", action) == 0)
     {
-        msgsnd(queueID, &value, sizeof(value), 0);
+        key_t queue1Key = ftok(queuePath, 1);
+
+        // Creazione queue
+        int queueID = msgget(queue1Key, 0777 | IPC_CREAT);
+        msgsnd(queueID, &msgpSND, sizeof(msgpSND.value), 0);
     }
-    else if (strcmp("get", action))
+    else if (strcmp("get", action) == 0)
     {
-        char getted[MAX_CHAR];
-        msgrcv(queueID, &getted, sizeof(getted), 1, 0);
-        printf("Messaggio recuperato %s\n", getted);
+        key_t queue1Key = ftok(queuePath, 1);
+
+        // Creazione queue
+        int queueID = msgget(queue1Key, 0777 | IPC_CREAT);
+        msgrcv(queueID, &msgpRCV, sizeof(msgpRCV.value), 1, 0);
+        printf("Messaggio recuperato %s\n", &msgpRCV.value);
     }
-    else if (strcmp("del", action))
+    else if (strcmp("del", action) == 0)
     {
+        key_t queue1Key = ftok(queuePath, 1);
+
+        // Creazione queue
+        int queueID = msgget(queue1Key, 0777 | IPC_CREAT);
         msgctl(queueID, IPC_RMID, NULL);
     }
-    else if (strcmp("emp", action))
+    else if (strcmp("emp", action) == 0)
     {
+        key_t queue1Key = ftok(queuePath, 1);
+
+        // Creazione queue
+        int queueID = msgget(queue1Key, 0777 | IPC_CREAT);
         char getted[MAX_CHAR];
-        while (msgrcv(queueID, &getted, sizeof(getted), 1, 0) != -1)
+        while (msgrcv(queueID, &msgpRCV, sizeof(msgpRCV.value), 1, 0) != -1)
         {
-            printf("Messaggio recuperato %s\n", getted);
+            printf("Messaggio recuperato %s\n", msgpRCV.value);
         }
     }
+    /*mov non implementata
+    else if (strcmp("mov", action) == 0)
+    {
+       
+    }
+    */
     else
         quit(3);
 }
@@ -180,8 +168,8 @@ int main(int argc, char **argv)
     strcpy(action, argv[2]);    // action = argv[2]
     if (argc == 5)
     {
-        strcpy(value, argv[3]); // value = argv[3];
-        strcpy(pid, argv[4]);   // pid = argv[4];
+        strcpy(msgpSND.value, argv[3]); // value = argv[3];
+        strcpy(pid, argv[4]);           // pid = argv[4];
     }
     else
         strcpy(pid, argv[3]); // pid = argv[3];
@@ -190,7 +178,7 @@ int main(int argc, char **argv)
     {
         printf("queuePath: %s\n", queuePath);
         printf("action: %s\n", action);
-        printf("value: %s\n", value);
+        printf("value: %s\n", msgpSND.value);
         printf("pid: %s\n", pid);
     }
 
